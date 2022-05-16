@@ -8,25 +8,24 @@ int main(){
 
   int qty;
   int bufferSize = 4096; 
-  //char userInput[0]; 
+  char userInput[0]; 
   unsigned char buffer[bufferSize];
   unsigned char bufferPad[bufferSize];
-
-  //printf("Please enter the name of the source file: ");  
-  //scanf("%s", userInput);  
+/*
+  printf("Please enter the name of the source file: ");  
+  scanf("%s", userInput);  
   
-  //if((userInput == "source.txt"))
-  //{
-  //  printf("%s", userInput);
-  //}
-    
-    
-  
+  //closes if incorrect input file 
+  if(!(strcmp(userInput, "source.txt") == 0)){
+    printf("Incorrect input file!");
+    return (0);
+    }  
+  */
   if(!(src = fopen("source.txt", "rb"))){
     printf("File does not exist!\n");
     exit(-1);
   }
-
+  
   dst = fopen("ciphertext.txt", "wb");
 
   while((qty = fread(buffer, 1, bufferSize, src))){
@@ -41,15 +40,6 @@ int main(){
   fclose(src);
 
   return(0);
-
-
-
-
-
-
-
-
-  
 }
 
 

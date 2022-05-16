@@ -1,3 +1,4 @@
+#include "main.c"
 #ifndef CRYPT_H
 #define CRYPT_H
 

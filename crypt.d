@@ -1,1 +1,1 @@
-crypt.o crypt.d : crypt.c crypt.h
+crypt.o crypt.d : crypt.c

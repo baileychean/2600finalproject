@@ -8,11 +8,22 @@ int main(){
 
   int qty;
   int bufferSize = 4096; 
+  //char userInput[0]; 
   unsigned char buffer[bufferSize];
 
+  //printf("Please enter the name of the source file: ");  
+  //scanf("%s", userInput);  
+  
+  //if((userInput == "source.txt"))
+  //{
+  //  printf("%s", userInput);
+  //}
+    
+    
+  
   if(!(src = fopen("source.txt", "rb"))){
     printf("File does not exist!\n");
-    exit(0);
+    exit(-1);
   }
 
   dst = fopen("ciphertext.txt", "wb");
@@ -25,6 +36,15 @@ int main(){
   fclose(src);
 
   return(0);
+
+
+
+
+
+
+
+
+  
 }
 
 

@@ -10,6 +10,7 @@ int main(){
   int bufferSize = 4096; 
   //char userInput[0]; 
   unsigned char buffer[bufferSize];
+  unsigned char bufferPad[bufferSize];
 
   //printf("Please enter the name of the source file: ");  
   //scanf("%s", userInput);  
@@ -30,6 +31,10 @@ int main(){
 
   while((qty = fread(buffer, 1, bufferSize, src))){
     fwrite(buffer, qty, 1, dst);
+
+    for(int i = 0; i < bufferSize; i++)
+      buffer[i] ^= bufferPad[i];
+    fwrite(buffer, 1, qty, dst);
   }
 
   fclose(dst);

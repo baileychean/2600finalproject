@@ -1,1 +1,1 @@
-main.o main.d : main.c crypt.c
+main.o main.d : main.c crypt.h

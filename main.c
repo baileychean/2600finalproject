@@ -1,53 +1,63 @@
 #include "stdio.h"
 #include "stdlib.h"
-#include "crypt.c"
+#include "crypt.h"
 
-int main(){
-  FILE* src;
-  FILE* dst;
-  FILE* otp;
+int main(){ 
+  FILE *src;   // source file 
+  FILE *otp;   // one time pad 
+  FILE *ciph;  // encrypt.txt
+  FILE *ciph2; // decrypted file 
   
-  int qty;
-  int bufferSize = 4096; 
   char userInput[0]; 
-  unsigned char buffer[bufferSize];
-  unsigned char bufferPad[bufferSize];
-/*
+
+  printf("Note: The proper names for the files are source.txt, encrypt.txt, and otp.dat.\n\n"); 
+  
+  // santizes user input for source 
   printf("Please enter the name of the source file: ");  
   scanf("%s", userInput);  
   
-  //closes if incorrect input file 
-  if(!(strcmp(userInput, "source.txt") == 0)){
-    printf("Incorrect input file!");
-    return (0);
-    }  
-  */
-  if(!(src = fopen("source.txt", "rb"))){
-    printf("File does not exist!\n");
-    exit(-1);
-  }
+  // if string doesn't match, ask again
+  while((strcmp(userInput, "source.txt") != 0)){  
+    printf("Incorrect file!\n\n");
+    printf("Please enter the name of the source file: ");  
+    scanf("%s", userInput); 
+    }
   
-  dst = fopen("ciphertext.txt", "wb");
+  //santizes user input for encrypted text
+  printf("Please enter the name of the cipher file: ");  
+  scanf("%s", userInput);  
+  
+  
+  while((strcmp(userInput, "encrypt.txt") != 0)){
+    printf("Incorrect file!\n\n");
+    printf("Please enter the name of the cipher file: ");  
+    scanf("%s", userInput); 
+    }
+  
+  //santizes user input for one time pad 
+  printf("Please enter the name of the one time pad file: ");  
+  scanf("%s", userInput);  
+  
+  
+  while((strcmp(userInput, "otp.dat") != 0)){        
+    printf("Incorrect file!\n\n");
+    printf("Please enter the name of the one time pad file: ");  
+    scanf("%s", userInput); 
+    }
+ 
+  printf("\nGenerating encrypt.txt...");
+
+  src = fopen("source.txt", "rb");
   otp = fopen("otp.dat", "rb");
+  ciph = fopen("encrypt.txt", "wb");
   
-  while((qty = fread(buffer, 1, bufferSize, src))){
-    fread(bufferPad, qty, 1, otp);
-
-    for(int i = 0; i < bufferSize; i++)
-      buffer[i] ^= bufferPad[i];
-    fwrite(buffer, 1, qty, dst);
-  }
-
-  fclose(dst);
+  //ciph2 = fopen("decrypt.txt", "wb");
+  
+  encrypt(src, otp, ciph);
+ // decrypt(ciph, otp, ciph2);
+  
+  fclose(ciph);
   fclose(src);
-
-  return(0);
+  fclose(otp);
+  //fclose(ciph2);
 }
-
-
-
-
-
-
-
-
